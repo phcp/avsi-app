@@ -29,16 +29,16 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication)
 			throws AuthenticationException {
 
-		String name = authentication.getName();
+		String email = authentication.getName();
 		String password = authentication.getCredentials().toString();
 
 		password = passwordEncoder.encode(password);
 
-		User user = userRepository.findByEmailAndAndPassword(name, password);
+		User user = userRepository.findByEmailAndAndPassword(email, password);
 
 		if (user != null) {
 			return new UsernamePasswordAuthenticationToken(
-				name, password, Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
+				email, password, Arrays.asList(new SimpleGrantedAuthority(user.getRole())));
 		}
 		else {
 			return null;
