@@ -2,6 +2,7 @@ package com.liferay.avsi.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,8 +13,9 @@ import javax.validation.constraints.NotEmpty;
 /**
  * @author Leonardo Barros
  */
-@Entity
-public class User {
+@Entity(name = "users")
+@Data
+public class User extends Audit {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,32 +27,11 @@ public class User {
 	@NotEmpty
 	private String name;
 
-	@JsonIgnore
 	@NotEmpty
 	private String password;
 
 	@NotEmpty
 	private String role;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
 	@JsonIgnore
 	public String getPassword() {
@@ -60,13 +41,5 @@ public class User {
 	@JsonProperty
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 }
