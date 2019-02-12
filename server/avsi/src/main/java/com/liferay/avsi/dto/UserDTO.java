@@ -1,24 +1,17 @@
-package com.liferay.avsi.entity;
+package com.liferay.avsi.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 /**
  * @author Leonardo Barros
  */
-@Entity(name = "users")
 @Data
-public class User extends Audit {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+public class UserDTO {
 	private long id;
 
 	@NotEmpty
@@ -32,6 +25,10 @@ public class User extends Audit {
 
 	@NotEmpty
 	private String role;
+
+	private Date createdAt;
+
+	private Date updatedAt;
 
 	@JsonIgnore
 	public String getPassword() {
