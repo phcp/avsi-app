@@ -23,6 +23,7 @@ public class CustomWebSecurityConfigurerAdapter extends WebSecurityConfigurerAda
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable().authorizeRequests()
 			.antMatchers(HttpMethod.POST,"/users").permitAll()
+			.antMatchers(HttpMethod.GET,"/login").permitAll()
 			.antMatchers(HttpMethod.POST,"/products").hasAuthority("producer")
 			.antMatchers(HttpMethod.POST,"/orders").hasAuthority("client")
 			.antMatchers("/products/*").hasAuthority("manager")
