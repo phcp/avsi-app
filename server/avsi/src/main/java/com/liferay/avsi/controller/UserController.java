@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -44,6 +45,13 @@ public class UserController {
 		users.forEach(u -> userDTOS.add(map(u)));
 
 		return new PageImpl<>(userDTOS);
+	}
+
+	@GetMapping("/login")
+	public UserDTO login(
+		@RequestParam("email") String email, @RequestParam("password") String password) {
+
+		return map(userRepository.findByEmailAndAndPassword(email, passwordEncoder.encode(password)));
 	}
 
 	private UserDTO map(User user) {
